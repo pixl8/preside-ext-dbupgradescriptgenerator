@@ -1,0 +1,19 @@
+{
+    "name":"PresideCMS Extension: DB Upgrade Script Generator",
+    "version":"1.0.0",
+    "author":"Pixl8 Interactive",
+    "createPackageDirectory":true,
+    "packageDirectory":"application/extensions/preside-ext-dbupgradescriptgenerator",
+    "homepage":"https://github.com/pixl8/preside-ext-dbupgradescriptgenerator",
+    "documentation":"https://github.com/pixl8/preside-ext-dbupgradescriptgenerator",
+    "repository":{
+        "type":"git",
+        "URL":"https://github.com/pixl8/preside-ext-dbupgradescriptgenerator"
+    },
+    "bugs":"https://github.com/pixl8/preside-ext-dbupgradescriptgenerator",
+    "slug":"preside-ext-dbupgradescriptgenerator",
+    "projectURL":"https://github.com/pixl8/preside-ext-dbupgradescriptgenerator",
+    "ignore":[
+        "**/.*"
+    ]
+}
