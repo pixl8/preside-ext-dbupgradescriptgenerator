@@ -1,6 +1,6 @@
 {
     "name":"PresideCMS Extension: DB Upgrade Script Generator",
-    "version":"1.0.0",
+    "version":"1.0.1",
     "author":"Pixl8 Interactive",
     "createPackageDirectory":true,
     "packageDirectory":"application/extensions/preside-ext-dbupgradescriptgenerator",

@@ -5,7 +5,7 @@ component extends="preside.system.base.AdminHandler" {
 	public void function preHandler( event, rc, prc ) {
 		super.preHandler( argumentCollection = arguments );
 
-		if ( !hasCmsPermission( "dbUpgradeScriptGenerator.generate" ) ) {
+		if ( !isFeatureEnabled( "dbUpgradeScriptGenerator" ) || !hasCmsPermission( "dbUpgradeScriptGenerator.generate" ) ) {
 			event.adminAccessDenied();
 		}
 
