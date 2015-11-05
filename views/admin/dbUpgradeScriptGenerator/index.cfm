@@ -1,6 +1,7 @@
 <cfscript>
-	formId   = "datasource";
-	formName = "dbupgradescriptgenerator.datasource";
+	formId             = "datasource";
+	formName           = "dbupgradescriptgenerator.datasource";
+	submissionEndpoint = event.buildAdminLink( "dbupgradescriptgenerator.generateScriptAction" );
 
 	args.validationResult = args.validationResult ?: "";
 </cfscript>
@@ -8,7 +9,7 @@
 <cfoutput>
 	<p class="alert alert-danger"><i class="fa fa-fw fa-exclamation-triangle"></i> #translateResource( "cms:dbupgradescriptgenerator.warning" )#</p>
 
-	<form id="#formId#" data-auto-focus-form="true" data-dirty-form="protect" class="form-horizontal" method="post" action="">
+	<form id="#formId#" data-auto-focus-form="true" data-dirty-form="protect" class="form-horizontal" method="post" action="#submissionEndpoint#">
 		#renderForm(
 			  formName         = formName
 			, context          = "admin"
