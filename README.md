@@ -33,6 +33,39 @@ From the root of your application, type the following command:
 
     box install pixl8/preside-ext-dbupgradescriptgenerator
 
+## Permissioning
+
+By default, only the system user can access the script generator wizard. To allow other admin roles to be able to access the wizard, add the following line to your application's `Config.cfc` file:
+
+    settings.adminRoles.sysadmin.append( "dbUpgradeScriptGenerator.*" );
+
+In this example, we are allowing the "sysadmin" user role to access the generator functionality. See the [CMS Permissioning documentation](https://docs.presidecms.com/devguides/cmspermissioning.html) for more details.
+
+### Switching the feature off entirely
+
+You may only wish the feature to be enabled in local or development environments. To do so, edit your application's `Config.cfc` file by toggling the `settings.features.dbUpgradeScriptGenerator.enabled` flag. For example:
+
+    component extends="preside.system.config.Config" {
+
+        public void function configure() {
+        	// ...
+
+            // feature turned off by default
+            settings.features.dbUpgradeScriptGenerator.enabled = false;
+
+        	// ...
+        }
+
+        public void function local() {
+        	// ...
+
+            // setting turned on for 'local' environment
+        	settings.features.dbUpgradeScriptGenerator.enabled = true;
+
+        	// ...
+        }
+    }
+
 
 
 
