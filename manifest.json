@@ -2,5 +2,5 @@
 	  "id"        : "preside-ext-dbupgradescriptgenerator"
 	, "title"     : "DB Upgrade Script Generator"
 	, "author"    : "The database upgrade script generator provides a GUI for generating upgrade scripts for remote systems."
-	, "version"   : "1.0.1"
+	, "version"   : "VERSION_NUMBER"
 }
