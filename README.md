@@ -76,15 +76,15 @@ For instance, you may do something like:
 ```bash
 echo "\
 GENERATE_DB_UPGRADE_SCRIPT_ONLY=true\
-datasource.host=my.db.server
-datasource.database_name=my_db
-datasource.user=my_db_user
-datasource.type=MySQL
-datasource.password=123
+datasource.host=my.db.server\
+datasource.database_name=my_db\
+datasource.user=my_db_user\
+datasource.type=MySQL\
+datasource.password=123\
 " > .env
 box install preside-ext-dbupgradescriptgenerator@2.0.0
 box preside start name=sqlgen port=4444 trayEnable=false openbrowser=false
-wget -O ./upgrade.sql http://localhost:4444
+wget -O ./upgrade.sql http://localhost:4444/
 box preside stop sqlgen
 ```
 
