@@ -1,7 +1,8 @@
 component extends="coldbox.system.Interceptor" {
 
-	property name="env" inject="coldbox:setting:env";
-	property name="dbSchemaSync" inject="delayedInjector:SqlSchemaSynchronizerForScriptGenerator";
+	property name="env"                             inject="coldbox:setting:env";
+	property name="dbSchemaSync"                    inject="delayedInjector:SqlSchemaSynchronizerForScriptGenerator";
+	property name="dbUpgradeScriptGeneratorService" inject="delayedInjector:dbUpgradeScriptGeneratorService";
 
 	public void function configure() {}
 
@@ -21,7 +22,7 @@ component extends="coldbox.system.Interceptor" {
 				script = e.detail ?: "";
 			}
 
-
+			script = dbUpgradeScriptGeneratorService.cleanScript( script );
 
 			content reset=true type="text/plain";
 			if ( Len( Trim( script ) ) ) {

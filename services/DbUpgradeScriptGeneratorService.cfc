@@ -7,11 +7,16 @@ component {
 	/**
 	 * @presideObjectService.inject  presideObjectServiceForScriptGenerator
 	 * @sqlSchemaSynchronizer.inject sqlSchemaSynchronizerForScriptGenerator
-	 *
+	 * @env.inject                   coldbox:setting:env
 	 */
-	public any function init( required any presideObjectService, required any sqlSchemaSynchronizer ) {
+	public any function init(
+		  required any    presideObjectService
+		, required any    sqlSchemaSynchronizer
+		, required struct env
+	) {
 		_setPresideObjectService(  arguments.presideObjectService  );
 		_setSqlSchemaSynchronizer( arguments.sqlSchemaSynchronizer );
+		_setEnv( arguments.env );
 	}
 
 // PUBLIC API
@@ -45,6 +50,36 @@ component {
 		}
 
 		return noSqlGenerated;
+	}
+
+	public string function cleanScript( required string script ) {
+		var cleaned         = arguments.script;
+		var env             = _getEnv();
+		var nl              = Chr( 13 ) & Chr( 10 );
+		var disableFkChecks = IsBoolean( env.DISABLE_FK_CHECKS ?: "" ) && env.DISABLE_FK_CHECKS;
+		var doNotDeprecate  = IsBoolean( env.DISABLE_FIELD_DEPRECATION_RENAME ?: "" ) && env.DISABLE_FIELD_DEPRECATION_RENAME;
+		var removeDupes     = IsBoolean( env.REMOVE_DUPLICATE_SCHEMA_UPGRADE_LINES ?: "" ) && env.REMOVE_DUPLICATE_SCHEMA_UPGRADE_LINES;
+
+		if ( disableFkChecks ) {
+			cleaned = Replace( cleaned, "set foreign_key_checks=0;", "", "all" );
+			cleaned = Replace( cleaned, "set foreign_key_checks=1;", "", "all" );
+			cleaned = "set foreign_key_checks=0;" & nl & cleaned & nl & "set foreign_key_checks=1;"
+		}
+
+		if ( doNotDeprecate ) {
+			cleaned = Replace( cleaned, "__deprecated__", "", "all" );
+		}
+
+		if ( removeDupes ) {
+			var deduped = StructNew( "linked" );
+			for( var line in ListToArray( cleaned, nl ) ) {
+				deduped[ Trim( line ) ] = 1;
+			}
+
+			cleaned = ArrayToList( StructKeyArray( deduped ), nl );
+		}
+
+		return cleaned;
 	}
 
 // PRIVATE HELPERS
@@ -88,5 +123,12 @@ component {
 	}
 	private void function _setSqlSchemaSynchronizer( required any sqlSchemaSynchronizer ) {
 		_sqlSchemaSynchronizer = arguments.sqlSchemaSynchronizer;
+	}
+
+	private struct function _getEnv() {
+	    return _env;
+	}
+	private void function _setEnv( required struct env ) {
+	    _env = arguments.env;
 	}
 }
