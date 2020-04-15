@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.0
+
+* Add feature to cleanup script that allows: remove duplicate script lines, never rename fields to __deprecated__ and disable foreign key checks during entire script (mysql/mariadb only)
+
 ## v2.0.0
 
 * Add a feature for forcing the application to ONLY EVER generate a SQL upgrade script if an environment flag is set. Allowing devs to use in build scripts to start an application with the view to always just generating the SQL upgrade script

@@ -7,9 +7,11 @@ component {
 	/**
 	 * @presideObjectService.inject  presideObjectServiceForScriptGenerator
 	 * @sqlSchemaSynchronizer.inject sqlSchemaSynchronizerForScriptGenerator
-	 *
 	 */
-	public any function init( required any presideObjectService, required any sqlSchemaSynchronizer ) {
+	public any function init(
+		  required any    presideObjectService
+		, required any    sqlSchemaSynchronizer
+	) {
 		_setPresideObjectService(  arguments.presideObjectService  );
 		_setSqlSchemaSynchronizer( arguments.sqlSchemaSynchronizer );
 	}
