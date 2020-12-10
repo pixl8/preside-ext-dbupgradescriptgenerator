@@ -58,17 +58,31 @@ component {
 		, required string  password
 		, required string  dsn
 	) {
-    	admin action     = "updateDatasource"
- 		      type       = "web"
- 		      classname  = "org.gjt.mm.mysql.Driver"
- 		      dsn        = "jdbc:mysql://#arguments.host#:#arguments.port#/#arguments.dbname#?useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=true"
- 		      name       = arguments.dsn
- 		      newName    = arguments.dsn
- 		      host       = arguments.host
- 		      database   = arguments.dbname
- 		      port       = arguments.port
- 		      dbusername = arguments.username
- 		      dbpassword = arguments.password;
+		try {
+			admin action     = "updateDatasource"
+				type       = "web"
+				classname  = "com.mysql.cj.jdbc.Driver"
+				dsn        = "jdbc:mysql://#arguments.host#:#arguments.port#/#arguments.dbname#?useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=true"
+				name       = arguments.dsn
+				newName    = arguments.dsn
+				host       = arguments.host
+				database   = arguments.dbname
+				port       = arguments.port
+				dbusername = arguments.username
+				dbpassword = arguments.password;
+		} catch(e) {
+			admin action     = "updateDatasource"
+				type       = "web"
+				classname  = "org.gjt.mm.mysql.Driver"
+				dsn        = "jdbc:mysql://#arguments.host#:#arguments.port#/#arguments.dbname#?useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=true"
+				name       = arguments.dsn
+				newName    = arguments.dsn
+				host       = arguments.host
+				database   = arguments.dbname
+				port       = arguments.port
+				dbusername = arguments.username
+				dbpassword = arguments.password;
+		}
 	}
 
 	private void function _teardownDsn() {
