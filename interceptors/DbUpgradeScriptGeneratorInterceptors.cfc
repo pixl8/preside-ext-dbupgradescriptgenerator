@@ -16,7 +16,9 @@ component extends="coldbox.system.Interceptor" {
 			}
 
 			try {
+				getController().getInterceptorService().processState( "preDbSyncObjects" );
 				dbSchemaSync.synchronize( StructKeyArray( dsns ), objects );
+				getController().getInterceptorService().processState( "postDbSyncObjects" );
 			} catch( "presidecms.auto.schema.sync.disabled" e ) {
 				script = e.detail ?: "";
 			}
