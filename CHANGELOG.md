@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.1
+
+* Ensure pre/post interceptors are fired before generating sql script
+
 ## v2.1.0
 
 * Add feature to cleanup script that allows: remove duplicate script lines, never rename fields to __deprecated__ and disable foreign key checks during entire script (mysql/mariadb only)
