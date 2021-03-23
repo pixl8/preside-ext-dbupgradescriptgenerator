@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.2
+
+* Support latest MySQL driver used by Lucee
+
 ## v2.1.1
 
 * Ensure pre/post interceptors are fired before generating sql script
